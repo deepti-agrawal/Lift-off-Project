@@ -1,10 +1,12 @@
 package guru.springframework.repositories;
 
+import guru.springframework.domain.MealCategory;
 import guru.springframework.domain.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
-/**
- * Created by jt on 6/13/17.
- */
+import java.util.List;
+
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
+
+    public List<Recipe> findRecipesByMealCategory(MealCategory mealCategory);
 }

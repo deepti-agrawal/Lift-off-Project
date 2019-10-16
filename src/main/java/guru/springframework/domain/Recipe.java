@@ -7,9 +7,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by jt on 6/13/17.
- */
 @Getter
 @Setter
 @Entity
@@ -19,6 +16,8 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private MealCategory mealCategory;
     private String description;
     private Integer prepTime;
     private Integer cookTime;
