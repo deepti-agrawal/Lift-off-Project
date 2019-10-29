@@ -19,8 +19,14 @@
 </head>
 <body>
 <nav th:fragment="navigation">
-   <h3> <a href="/">Browse By Categories</a> |
-    <a href="@{/search}">Search Recipe</a></h3>
+    <div class="html-editor-align-left">
+       <h3>
+           <a href="/">Browse By Categories</a> |
+           <a href="/search">Search Recipe</a> |
+           <a href ="/login">Login</a>
+       </h3>
+    </div>
+    <div class="html-editor-align-right">Welcome</div>
     <hr/>
 </nav>
 

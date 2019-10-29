@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
-    public List<Recipe> findRecipesByMealCategory(MealCategory mealCategory);
+    List<Recipe> findRecipesByMealCategory(MealCategory mealCategory);
+
+    List<Recipe> findAllByDescriptionLike(String description);
+
 }
