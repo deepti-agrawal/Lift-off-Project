@@ -6,9 +6,12 @@ import guru.springframework.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -20,28 +23,36 @@ public class UserController {
         this.service = service;
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String getRegistrationPage(Model model){
         model.addAttribute("user",new UserCommand());
         return "register";
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute UserCommand userCommand, Model model){
+    @PostMapping("/register")
+    public String registerUser(Model model, @ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
+        if(errors.hasErrors()){
+            log.info("In the error block of registerUser in UserController");
+            return "register";
+        }
         User user = service.saveUser(userCommand);
         model.addAttribute("user",user);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @GetMapping("/login")
     public String getLoginPage(Model model){
         model.addAttribute("user",new UserCommand());
         model.addAttribute("title","Login");
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String loginUser(@ModelAttribute UserCommand userCommand){
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
+        if(errors.hasErrors()){
+            log.info("In the error block of registerUser in UserController");
+            return "login";
+        }
         User user = service.getUserByUserName(userCommand.getUsername());
         if(user.getUsername().equals(userCommand.getUsername()) && user.getPassword().equals(userCommand.getPassword())){
             return "redirect:/";

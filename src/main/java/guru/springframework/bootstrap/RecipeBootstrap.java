@@ -1,7 +1,7 @@
 package guru.springframework.bootstrap;
 
 import guru.springframework.domain.*;
-import guru.springframework.repositories.CategoryRepository;
+import guru.springframework.repositories.MealCategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRespository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +18,12 @@ import java.util.Optional;
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final CategoryRepository categoryRepository;
+    private final MealCategoryRepository mealCategoryRepository;
     private final UnitOfMeasureRespository unitOfMeasureRepository;
     private final RecipeRepository recipeRepositary;
 
-    public RecipeBootstrap(CategoryRepository categoryRepository, UnitOfMeasureRespository measureRespository, RecipeRepository recipeRepositary) {
-        this.categoryRepository = categoryRepository;
+    public RecipeBootstrap(MealCategoryRepository mealCategoryRepository, UnitOfMeasureRespository measureRespository, RecipeRepository recipeRepositary) {
+        this.mealCategoryRepository = mealCategoryRepository;
         this.unitOfMeasureRepository = measureRespository;
         this.recipeRepositary = recipeRepositary;
     }
@@ -84,20 +84,20 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         UnitOfMeasure cupsUom = cupsUomOptional.get();
 
         //get Categories
-        Optional<Category> americanCategoryOptional = categoryRepository.findByDescription("American");
+        Optional<MealCategory> breakfastOptional = mealCategoryRepository.findByDescription("Breakfast");
 
-        if(!americanCategoryOptional.isPresent()){
+        if(!breakfastOptional.isPresent()){
             throw new RuntimeException("Expected Category Not Found");
         }
 
-        Optional<Category> mexicanCategoryOptional = categoryRepository.findByDescription("Mexican");
+        Optional<MealCategory> drinkOptional = mealCategoryRepository.findByDescription("Dinner");
 
-        if(!mexicanCategoryOptional.isPresent()){
+        if(!drinkOptional.isPresent()){
             throw new RuntimeException("Expected Category Not Found");
         }
 
-        Category americanCategory = americanCategoryOptional.get();
-        Category mexicanCategory = mexicanCategoryOptional.get();
+        MealCategory americanCategory = breakfastOptional.get();
+        MealCategory mexicanCategory = drinkOptional.get();
 
         //Yummy Guac
         Recipe guacRecipe = new Recipe();

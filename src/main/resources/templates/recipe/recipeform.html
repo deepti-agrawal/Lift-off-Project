@@ -19,6 +19,7 @@
                                 <div class="col-md-3 form-group">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
+                                    <span th:errors="*{description}" class="error" style="color: red;"></span>
                                 </div>
                             </div>
                             <div class="row">
@@ -26,11 +27,11 @@
                                     <label>Categories:</label>
                                 </div>
                                 <div class="col-md-9 form-group">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 1
-                                        </label>
+                                    <select class="form-control" name="mealCategory.id">
+                                        <option th:each="mealCategory : ${mealCategories}"
+                                                th:value="${mealCategory.id}"
+                                                th:text="${mealCategory.description}"></option>
+                                    </select>
                                     </div>
                                     <div class="radio" th:remove="all">
                                         <label>
@@ -44,10 +45,12 @@
                                 <div class="col-md-3 form-group">
                                     <label>Prep Time:</label>
                                     <input type="text" class="form-control" th:field="*{prepTime}"/>
+                                    <span th:errors="*{prepTime}" class="error" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Cooktime:</label>
                                     <input type="text" class="form-control" th:field="*{cookTime}"/>
+                                    <span th:errors="*{cookTime}" class="error" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
@@ -68,14 +71,17 @@
                                 <div class="col-md-3 form-group">
                                     <label>Servings:</label>
                                     <input type="text" class="form-control" th:field="*{servings}"/>
+                                    <span th:errors="*{servings}" class="error" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Source:</label>
                                     <input type="text" class="form-control" th:field="*{source}"/>
+                                    <span th:errors="*{source}" class="error" style="color: red;"></span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>URL:</label>
                                     <input type="text" class="form-control" th:field="*{url}"/>
+                                    <span th:errors="*{url}" class="error" style="color: red;"></span>
                                 </div>
                             </div>
                         </div>

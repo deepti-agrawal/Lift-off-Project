@@ -16,17 +16,24 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
+    <style>
+        body{
+            background-image: url("http://sg-fitclub.com/wp-content/uploads/2014/12/5-Types-of-Food-that-Helps-Regulate-Appetite.jpg");
+            background-position: revert;
+        }
+    </style>
+
 </head>
 <body>
 <nav th:fragment="navigation">
-    <div class="html-editor-align-left">
-       <h3>
-           <a href="/">Browse By Categories</a> |
-           <a href="/search">Search Recipe</a> |
-           <a href ="/login">Login</a>
-       </h3>
-    </div>
-    <div class="html-editor-align-right">Welcome</div>
+    <h3>
+        <div class="html-editor-align-left">
+           <a style="color: black;" href="/">Browse By Categories</a> |
+           <a style="color: black;" href="/search">Search Recipe</a> |
+           <a style="color: black;" href ="/login">Login</a>
+        </div>
+    <div style="color: black; text-align:right;">Welcome</div>
+    </h3>
     <hr/>
 </nav>
 

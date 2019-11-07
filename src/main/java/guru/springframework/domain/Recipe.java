@@ -41,10 +41,10 @@ public class Recipe {
     private Notes notes;
 
     @ManyToMany
-    @JoinTable(name = "recipe_category",
+    @JoinTable(name = "recipe_meal_category",
         joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "meal_category_id"))
+    private Set<MealCategory> categories = new HashSet<>();
 
     public void setNotes(Notes notes) {
         if (notes != null) {

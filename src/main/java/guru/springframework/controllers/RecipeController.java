@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 import guru.springframework.commands.RecipeCommand;
+import guru.springframework.services.MealCategoryService;
 import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class RecipeController {
 
     private final RecipeService recipeService;
+    private final MealCategoryService mealCategoryService;
 
-    public RecipeController(RecipeService recipeService) {
+    public RecipeController(RecipeService recipeService, MealCategoryService mealCategoryService) {
         this.recipeService = recipeService;
+        this.mealCategoryService = mealCategoryService;
     }
 
     @GetMapping("/recipe/{id}/show")
@@ -29,6 +32,7 @@ public class RecipeController {
     @GetMapping("recipe/new")
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
+        model.addAttribute("mealCategories", mealCategoryService.getCategories());
         return "recipe/recipeform";
     }
 

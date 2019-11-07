@@ -2,44 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+<nav th:replace="fragments :: navigation"></nav>
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <form  th:object="${user}" th:action="@{/register/}" method="post">
-                    <div class="pannel-group">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h1 class="panel-title">Register User:</h1>
-                            </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Register User:</h1>
                         </div>
+                    </div>
                         <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-3 form-group">
-                                        <label>Username:</label>
-                                        <input type="text" class="form-control" th:field="*{username}"/>
+                                    <div class="col-md-8 form-group">
+                                        <label style="color: black; font-family: Tahoma; font-size: larger;">Username:
+                                            <input type="text" class="form-control" th:field="*{username}"/>
+                                        <span th:errors="*{username}" class="error" style="color: red;"></span></label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 form-group">
-                                        <label>Password:</label>
-                                        <input type="text" class="form-control" th:field="*{password}"/>
+                                    <div class="col-md-8 form-group">
+                                        <label style="color: black; font-family: Tahoma; font-size: larger;">Password:
+                                            <input type="text" class="form-control" th:field="*{password}"/>
+                                        <span th:errors="*{password}" class="error" style="color: red;"></span></label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 form-group">
-                                        <label>Confirm Password:</label>
-                                        <input type="text" class="form-control" th:field="*{confirm}"/>
+                                    <div class="col-md-8 form-group">
+                                        <label style="color: black; font-family: Tahoma; font-size: larger;">Confirm Password:
+                                            <input type="text" class="form-control" th:field="*{confirm}"/>
+                                        <span th:errors="*{confirm}" class="error" style="color: red;"></span></label>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 form-group">
-                                        <label>Email:</label>
-                                        <input type="text" class="form-control" th:field="*{email}"/>
+                                    <div class="col-md-8 form-group">
+                                        <label style="color: black; font-family: Tahoma; font-size: larger;">Email:
+                                            <input type="text" class="form-control" th:field="*{email}"/>
+                                        <span th:errors="*{email}" class="error" style="color: red;"></span></label>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                    </div>
                 </form>
             </div>
         </div>

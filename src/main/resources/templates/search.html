@@ -2,16 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-    <form  th:object="${search}" th:action="@{/search/}" method="post">
+<nav th:replace="fragments :: navigation"></nav>
+    <form  th:object="${searchObject}" method="post">
         <div class="panel-body">
-            <div class="row">
                 <div class="col-md-3 form-group">
-                    <label>Search Keyword:</label>
+                    <label style="color: black; font-family: Tahoma; font-size: larger;">Search Keyword:
                     <input type="text" class="form-control" th:field="*{description}"/>
+                    <span th:errors="*{description}" class="error" style="color: red;"></span>
+                    </label>
                     <br>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </div>
         </div>
     </form>
 </body>
