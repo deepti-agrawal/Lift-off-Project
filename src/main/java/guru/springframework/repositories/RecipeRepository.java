@@ -5,10 +5,11 @@ import guru.springframework.domain.Recipe;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
-    List<Recipe> findRecipesByMealCategory(MealCategory mealCategory);
+    Set<Recipe> findAllByMealCategoryEquals(MealCategory mealCategory);
 
     List<Recipe> findAllByDescriptionLike(String description);
 

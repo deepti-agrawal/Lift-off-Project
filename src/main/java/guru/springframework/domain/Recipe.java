@@ -16,8 +16,6 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private MealCategory mealCategory;
     private String description;
     private Integer prepTime;
     private Integer cookTime;
@@ -40,11 +38,11 @@ public class Recipe {
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "recipe_meal_category",
         joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "meal_category_id"))
-    private Set<MealCategory> categories = new HashSet<>();
+    private Set<MealCategory> mealCategory = new HashSet<>();
 
     public void setNotes(Notes notes) {
         if (notes != null) {

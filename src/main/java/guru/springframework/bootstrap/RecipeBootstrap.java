@@ -31,7 +31,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         log.info("Loading bootstrap data.....");
-       // recipeRepositary.saveAll(getRecipes());
+       //recipeRepositary.saveAll(getRecipes());
     }
 
     private List<Recipe> getRecipes() {
@@ -96,8 +96,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
             throw new RuntimeException("Expected Category Not Found");
         }
 
-        MealCategory americanCategory = breakfastOptional.get();
-        MealCategory mexicanCategory = drinkOptional.get();
+        MealCategory breakfastCategory = breakfastOptional.get();
+        MealCategory drinkCategory = drinkOptional.get();
 
         //Yummy Guac
         Recipe guacRecipe = new Recipe();
@@ -139,8 +139,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.addIngredient(new Ingredient("freshly grated black pepper", new BigDecimal(2), dashUom));
         guacRecipe.addIngredient(new Ingredient("ripe tomato, seeds and pulp removed, chopped", new BigDecimal(".5"), eachUom));
 
-        guacRecipe.getCategories().add(americanCategory);
-        guacRecipe.getCategories().add(mexicanCategory);
+        guacRecipe.getMealCategory().add(breakfastCategory);
+        guacRecipe.getMealCategory().add(drinkCategory);
 
         guacRecipe.setUrl("http://www.simplyrecipes.com/recipes/perfect_guacamole/");
         guacRecipe.setServings(4);
@@ -201,8 +201,8 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         tacosRecipe.addIngredient(new Ingredient("cup sour cream thinned with 1/4 cup milk", new BigDecimal(4), cupsUom));
         tacosRecipe.addIngredient(new Ingredient("lime, cut into wedges", new BigDecimal(4), eachUom));
 
-        tacosRecipe.getCategories().add(americanCategory);
-        tacosRecipe.getCategories().add(mexicanCategory);
+        tacosRecipe.getMealCategory().add(breakfastCategory);
+        tacosRecipe.getMealCategory().add(drinkCategory);
 
         tacosRecipe.setUrl("http://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
         tacosRecipe.setServings(4);

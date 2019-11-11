@@ -43,8 +43,8 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
         command.setImage(source.getImage());
         command.setNotes(notesConverter.convert(source.getNotes()));
 
-        if (source.getCategories() != null && source.getCategories().size() > 0){
-            source.getCategories()
+        if (source.getMealCategory() != null && source.getMealCategory().size() > 0){
+            source.getMealCategory()
                     .forEach((MealCategory category) -> command.getMealcategories().add(categoryConveter.convert(category)));
         }
 

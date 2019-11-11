@@ -39,7 +39,8 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Set<Recipe> getRecipesByMealCategory(MealCategory mealCategory){
         Set<Recipe> recipeSet = new HashSet<>();
-        recipeRepository.findRecipesByMealCategory(mealCategory).iterator().forEachRemaining(recipeSet::add);
+        recipeRepository.findAllByMealCategoryEquals(mealCategory).iterator().forEachRemaining(recipeSet::add);
+        System.out.println("******************"+recipeSet.size());
         return recipeSet;
     }
 
