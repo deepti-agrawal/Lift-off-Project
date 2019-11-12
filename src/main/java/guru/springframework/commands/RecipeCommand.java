@@ -1,6 +1,7 @@
 package guru.springframework.commands;
 
 import guru.springframework.domain.Difficulty;
+import guru.springframework.domain.MealCategory;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -45,5 +46,8 @@ public class RecipeCommand {
     private Byte[] image;
     private Difficulty difficulty;
     private NotesCommand notes;
-    private Set<MealCategoryCommand> mealcategories = new HashSet<>();
+    //this field is used to get multiple values from html
+    private String[] mealcategories;
+    //only used for converting data and saving it
+    private Set<MealCategory> categories = new HashSet<>();
 }

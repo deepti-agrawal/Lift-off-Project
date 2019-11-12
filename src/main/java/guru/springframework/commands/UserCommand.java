@@ -27,6 +27,6 @@ public class UserCommand {
     private String password;
 
     @NotNull
-    @Size(min=5,max=20,message = "Password does not match.")
+    @Size(min=5,max=20, message = "Password does not match.")
     private String confirm;
 }

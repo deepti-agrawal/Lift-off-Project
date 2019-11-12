@@ -1,7 +1,6 @@
 package guru.springframework.converters;
 
 import guru.springframework.commands.RecipeCommand;
-import guru.springframework.domain.MealCategory;
 import guru.springframework.domain.Recipe;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -11,13 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
 
-    private final MealCategoryToMealCategoryCommand categoryConveter;
     private final IngredientToIngredientCommand ingredientConverter;
     private final NotesToNotesCommand notesConverter;
 
-    public RecipeToRecipeCommand(MealCategoryToMealCategoryCommand categoryConveter, IngredientToIngredientCommand ingredientConverter,
-                                 NotesToNotesCommand notesConverter) {
-        this.categoryConveter = categoryConveter;
+    public RecipeToRecipeCommand(IngredientToIngredientCommand ingredientConverter, NotesToNotesCommand notesConverter) {
         this.ingredientConverter = ingredientConverter;
         this.notesConverter = notesConverter;
     }
@@ -42,17 +38,11 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
         command.setUrl(source.getUrl());
         command.setImage(source.getImage());
         command.setNotes(notesConverter.convert(source.getNotes()));
-
-        if (source.getMealCategory() != null && source.getMealCategory().size() > 0){
-            source.getMealCategory()
-                    .forEach((MealCategory category) -> command.getMealcategories().add(categoryConveter.convert(category)));
-        }
-
+        command.setCategories(source.getMealCategory());
         if (source.getIngredients() != null && source.getIngredients().size() > 0){
             source.getIngredients()
                     .forEach(ingredient -> command.getIngredients().add(ingredientConverter.convert(ingredient)));
         }
-
         return command;
     }
 }

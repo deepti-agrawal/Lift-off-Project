@@ -12,7 +12,7 @@
                 <div class="pannel-group">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Edit Recipe Information</h1>
+                            <h1 class="panel-title">Add/Edit Recipe Information</h1>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -28,24 +28,13 @@
                                 <div class="col-md-3 form-group">
                                     <label>Categories:</label>
                                 </div>
-                                <div class="col-md-5 form-group">
-                                    <!-- <select class="form-control" name="mealCategory.id">
-                                        <option th:each="mealCategory : ${mealCategories}"
-                                                th:value="${mealCategory.id}"
-                                                th:text="${mealCategory.description}"></option>
-                                    </select>-->
-                                    <ul class="form-select-button">
+                                <div class="col-md-3 form-select-button">
+                                    <ul>
                                         <li th:each="mealCategory : ${mealCategories}">
                                             <input type="checkbox" th:field="*{mealcategories}" th:value="${mealCategory.id}"/>
                                             <label th:text="${mealCategory.description}"></label>
                                         </li>
                                     </ul>
-                                    </div>
-                                    <div class="radio" th:remove="all">
-                                        <label>
-                                            <input type="checkbox" value=""/>
-                                            Cat 2
-                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -67,11 +56,6 @@
                                                 th:value="${difficultyValue.name()}"
                                                 th:text="${difficultyValue.name()}"
                                         >val</option>
-                                    </select>
-                                    <select class="form-control" th:remove="all">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
                                     </select>
                                 </div>
                             </div>
@@ -101,7 +85,7 @@
                                     <h1 class="panel-title">Ingredients</h1>
                                 </div>
                                 <div class="col-md-1">
-                                    <a class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
+                                    <a th:if="${not #lists.isEmpty(recipe.ingredients)}" class="btn btn-default" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredients'}" role="button">View</a>
                                 </div>
                             </div>
                         </div>
@@ -109,9 +93,6 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <ul th:if="${not #lists.isEmpty(recipe.ingredients)}">
-                                        <li th:remove="all">1 Cup of milk</li>
-                                        <li th:remove="all">1 Teaspoon of chocolate</li>
-                                        <li th:remove="all">asdf</li>
                                         <li th:each="ingredient : ${recipe.ingredients}"
                                             th:text="${(ingredient.getAmount() +
                                         ' ' + ingredient.uom.getDescription() +

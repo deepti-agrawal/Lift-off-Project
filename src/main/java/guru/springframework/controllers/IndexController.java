@@ -35,6 +35,7 @@ public class IndexController {
         model.addAttribute("title","Recipe Home");
         MealCategory mealCategory = new MealCategory();
         mealCategory.setId(Long.valueOf(id));
+        model.addAttribute("mealCategory",mealCategory);
         model.addAttribute("recipes",recipeService.getRecipesByMealCategory(mealCategory));
         return "recipe/showRecipes";
     }

@@ -19,6 +19,7 @@
                                 <th>ID</th>
                                 <th>Description</th>
                                 <th>View</th>
+                                <th>Add Recipe</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -35,6 +36,7 @@
                                 <td th:text="${category.id}">334</td>
                                 <td th:text="${category.description}">Tasty Goodnees 3</td>
                                 <td><a href="#" th:href="@{'/category/' + ${category.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'recipe/new'}">Add</a></td>
                             </tr>
                         </table>
                     </div>

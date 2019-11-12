@@ -10,13 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
-    private final MealCategoryCommandToMealCategory categoryConveter;
     private final IngredientCommandToIngredient ingredientConverter;
     private final NotesCommandToNotes notesConverter;
 
-    public RecipeCommandToRecipe(MealCategoryCommandToMealCategory categoryConveter, IngredientCommandToIngredient ingredientConverter,
-                                 NotesCommandToNotes notesConverter) {
-        this.categoryConveter = categoryConveter;
+    public RecipeCommandToRecipe(IngredientCommandToIngredient ingredientConverter, NotesCommandToNotes notesConverter) {
         this.ingredientConverter = ingredientConverter;
         this.notesConverter = notesConverter;
     }
@@ -40,17 +37,11 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
         recipe.setSource(source.getSource());
         recipe.setUrl(source.getUrl());
         recipe.setNotes(notesConverter.convert(source.getNotes()));
-
-        if (source.getMealcategories() != null && source.getMealcategories().size() > 0){
-            source.getMealcategories()
-                    .forEach( category -> recipe.getMealCategory().add(categoryConveter.convert(category)));
-        }
-
+        recipe.setMealCategory(source.getCategories());
         if (source.getIngredients() != null && source.getIngredients().size() > 0){
             source.getIngredients()
                     .forEach(ingredient -> recipe.getIngredients().add(ingredientConverter.convert(ingredient)));
         }
-
         return recipe;
     }
 }

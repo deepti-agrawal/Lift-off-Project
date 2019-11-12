@@ -31,6 +31,8 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUser(Model model, @ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
+        if(!userCommand.getPassword().equals(userCommand.getConfirm()))
+            errors.rejectValue("password","notmatch.password");
         if(errors.hasErrors()){
             log.info("In the error block of registerUser in UserController");
             return "register";
