@@ -28,11 +28,13 @@
 <nav th:fragment="navigation">
     <h3>
         <div class="html-editor-align-left">
-           <a style="color: black;" href="/">Browse By Categories</a> |
-           <a style="color: black;" href="/search">Search Recipe</a> |
-           <a style="color: black;" href ="/login">Login</a>
+            <a style="color: white;" href="/">Browse By Categories</a>
+            <a style="color: white;" href="/search">| Search Recipe</a>
+            <a th:if="${session.user != null}" style="color: white;" href ="/favorite">| My Favorite Recipes</a>
+            <a th:if="${session.user == null}" style="color: white;" href ="/login">| Login</a>
+            <a th:if="${session.user != null}" style="color: white;" href ="/logout">| Logout</a>
+            <div th:if="${session.user != null}" style="color: white;" th:text=" | Welcome, ${session.user.username}"/>
         </div>
-    <div style="color: black; text-align:right;">Welcome</div>
     </h3>
     <hr/>
 </nav>

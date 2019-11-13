@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Slf4j
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(Model model, @ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
+    public String registerUser(HttpServletRequest request, Model model, @ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
         if(!userCommand.getPassword().equals(userCommand.getConfirm()))
             errors.rejectValue("password","notmatch.password");
         if(errors.hasErrors()){
@@ -39,6 +40,7 @@ public class UserController {
         }
         User user = service.saveUser(userCommand);
         model.addAttribute("user",user);
+        request.getSession().setAttribute("user",user);
         return "redirect:/";
     }
 
@@ -50,15 +52,24 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
+    public String loginUser(HttpServletRequest request, @ModelAttribute("user") @Valid UserCommand userCommand, Errors errors){
         if(errors.hasErrors()){
             log.info("In the error block of registerUser in UserController");
             return "login";
         }
         User user = service.getUserByUserName(userCommand.getUsername());
         if(user.getUsername().equals(userCommand.getUsername()) && user.getPassword().equals(userCommand.getPassword())){
+            request.getSession().setAttribute("user",user);
             return "redirect:/";
         }
+        errors.rejectValue("username","notmatch.username");
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request){
+        request.getSession().invalidate();
+        request.getSession().removeAttribute("user");
+        return "redirect:/";
     }
 }

@@ -1,6 +1,7 @@
 package guru.springframework.controllers;
 
 import guru.springframework.domain.MealCategory;
+import guru.springframework.domain.User;
 import guru.springframework.services.MealCategoryService;
 import guru.springframework.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @Controller
@@ -22,8 +25,11 @@ public class IndexController {
     }
 
     @RequestMapping({"","/","/index"})
-    public String getIndex(Model model){
+    public String getIndex(HttpServletRequest request, Model model){
         log.info("Getting the index page....");
+        User user = (User) request.getSession().getAttribute("user");
+        if(user != null)
+            System.out.println("*************************"+user.getUserId());
         model.addAttribute("title","Recipe Home");
         model.addAttribute("categories",mealCategoryService.getCategories());
         return "index";
