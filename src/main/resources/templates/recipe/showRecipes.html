@@ -22,6 +22,7 @@
                                 <th>View</th>
                                 <th th:if="${session.user != null && session.user.role == 'admin'}">Update</th>
                                 <th th:if="${session.user != null && session.user.role == 'admin'}">Delete</th>
+                                <th th:if="${session.user != null && session.user.role != 'admin'}"></th>
                             </tr>
                             </thead>
                             <tr th:each="recipe : ${recipes}">
@@ -30,6 +31,7 @@
                                 <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
                                 <td><a th:if="${session.user != null && session.user.role == 'admin'}" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/update'}">Update</a></td>
                                 <td><a th:if="${session.user != null && session.user.role == 'admin'}" href="#" th:href="@{'/recipe/' + ${recipe.id} + '/delete'}">Delete</a></td>
+                                <td><a th:if="${session.user != null && session.user.role != 'admin'}" href="#" th:href="@{'/' + ${recipe.id} + '/favorite'}">Add to Favorite</a></td>
                             </tr>
                         </table>
                     </div>

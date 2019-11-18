@@ -44,10 +44,10 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "meal_category_id"))
     private Set<MealCategory> mealCategory = new HashSet<>();
 
-   /* @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "recipe_user",
+  /* @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_recipe",
             joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "userId"))
+            inverseJoinColumns = @JoinColumn(name = "user_Id"))
     private Set<User> users = new HashSet<>();*/
 
     public void setNotes(Notes notes) {

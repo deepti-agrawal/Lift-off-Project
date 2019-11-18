@@ -30,7 +30,7 @@
         <div class="html-editor-align-left">
             <a style="color: white;" href="/">Browse By Categories</a>
             <a style="color: white;" href="/search">| Search Recipe</a>
-            <a th:if="${session.user != null}" style="color: white;" href ="/favorite">| My Favorite Recipes</a>
+            <a th:if="${session.user != null}" style="color: white;" href ="/myfavorite">| My Favorite Recipes</a>
             <a th:if="${session.user == null}" style="color: white;" href ="/login">| Login</a>
             <a th:if="${session.user != null}" style="color: white;" href ="/logout">| Logout</a>
             <div th:if="${session.user != null}" style="color: white;" th:text=" | Welcome, ${session.user.username}"/>

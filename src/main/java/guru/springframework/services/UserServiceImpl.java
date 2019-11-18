@@ -6,6 +6,7 @@ import guru.springframework.domain.User;
 import guru.springframework.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -20,12 +21,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User saveUser(UserCommand userCommand) {
         User user = commandToUser.convert(userCommand);
         return userRepository.save(user);
     }
 
     @Override
+    @Transactional
     public User getUserByUserName(String username) {
         return userRepository.findUserByUsername(username);
     }

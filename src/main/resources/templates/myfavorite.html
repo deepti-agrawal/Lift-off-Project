@@ -11,7 +11,7 @@
                     <h1 class="panel-title">My Favorite Recipes</h1>
                 </div>
                 <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(myrecipes)}">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(myRecipes)}">
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
@@ -20,10 +20,10 @@
                                 <th>View</th>
                             </tr>
                             </thead>
-                            <tr th:each="recipe : ${myrecipes}">
+                            <tr th:each="recipe : ${myRecipes}">
                                 <td th:text="${recipe.id}">334</td>
                                 <td th:text="${recipe.description}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/category/' + ${recipe.id} + '/show'}">View</a></td>
+                                <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/show'}">View</a></td>
                             </tr>
                         </table>
                     </div>
